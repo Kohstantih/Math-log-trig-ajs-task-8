@@ -28,7 +28,7 @@ export default class CorrectionDamage extends Character {
     this._attack = value;
   }
 
-  get attack() {    
+  get attack() {
     let damage = this._attack * (1 - (this._distance - 1) / 10);
     if (this._stoned) damage -= Math.round(Math.log2(this._distance) * 5);
     return damage;

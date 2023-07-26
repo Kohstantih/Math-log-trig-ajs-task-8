@@ -16,8 +16,7 @@
             "WithStatement"
         ],
         "no-underscore-dangle": [
-        "error", { "enforceInClassFields": true }
+            "error", { "allowAfterThis": true }
         ]
-    },
-    
+    }    
 }
