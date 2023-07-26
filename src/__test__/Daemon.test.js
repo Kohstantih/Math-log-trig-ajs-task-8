@@ -1,17 +1,11 @@
 import Daemon from "../js/Daemon";
 
-test(('check change stoned'), () => {
+test(('check change stoned'), () => {    
     const daemon = new Daemon('Демон', 'Daemon');
+    daemon.stoned = true;
+    const received = daemon.stoned;
 
-    daemon.setStoned();
-    const receivedSet = daemon.stoned;
-
-
-    daemon.removeStoned();
-    const receivedRemove = daemon.stoned;
-
-    expect(receivedSet).toBe(true);
-    expect(receivedRemove).toBe(false);
+    expect(received).toBe(true);
 })
 
 test.each([
@@ -19,22 +13,25 @@ test.each([
     [2.3, 'Недопустимое расстояние для атаки'],
     [0, 'Недопустимое расстояние для атаки'],
     [6, 'Недопустимое расстояние для атаки'],
-    [3, 80]
-])(('check \"setDamage\" - \"stoned = false\"'), (x, expected) => {
+    [3, 3]
+])(('check \"distance\"'), (distance, expected) => {
     try {
         const daemon = new Daemon('Демон', 'Daemon');
-        const received = daemon.setDamage(x)
+        daemon.distance = distance;
+        const received = daemon.distance;
         expect(received).toBe(expected);        
     } catch (error) {
         expect(error.message).toBe(expected)
     }
 })
 
-test(('check \"setDamage\" - \"stoned = true\"'), () => {
+test.each([
+    [2, false, 90],
+    [2, true, 85],
+])(('check \"setDamage\"'), (distance, stoned, expected) => {
     const daemon = new Daemon('Демон', 'Daemon');
-
-    daemon.setStoned();
-    const received = daemon.setDamage(2);
-
-    expect(received).toBe(85);
-})
+    daemon.distance = distance;
+    daemon.stoned = stoned;        
+    const received = daemon.attack;
+    expect(received).toBe(expected);
+});

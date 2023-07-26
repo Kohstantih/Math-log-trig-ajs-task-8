@@ -1,8 +1,8 @@
 import CorrectionDamage from './CorrectionDamage';
 
 export default class Daemon extends CorrectionDamage {
-  constructor(name, type, health, level, stoned, attack = 100, defence = 40) {
-    super(name, type, health, level, stoned);
+  constructor(name, type, health, level, stoned, distance, attack = 100, defence = 40) {
+    super(name, type, health, level, stoned, distance);
     this.attack = attack;
     this.defence = defence;
   }
