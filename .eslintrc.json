@@ -14,9 +14,10 @@
             "error",
             "LabeledStatement",
             "WithStatement"
+        ],
+        "no-underscore-dangle": [
+        "error", { "enforceInClassFields": true }
         ]
     },
-    "no-underscore-dangle": [
-        "error", { "enforceInClassFields": true }
-    ]
+    
 }
